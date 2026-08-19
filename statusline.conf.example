@@ -1,0 +1,50 @@
+# agy-statusline configuration
+# Location: ~/.gemini/statusline.conf
+#
+# Any setting here can also be overridden by environment variables
+# prefixed with STATUSLINE_, e.g. STATUSLINE_THEME="nerd"
+
+# Theme preset: emoji (default), nerd, ascii, powerline
+# - emoji:     Standard Unicode emoji icons (✍️ , ⚡, ⟳, 🖥️ , 🤖, ⚙️ , ●○)
+# - nerd:      Nerd Fonts icons (󱐌, 󱐋, 󰑐, 󰒋, 󰚩, 󰑮, , █░)
+# - ascii:     Pure ASCII characters (ctx:, *, reset:, @host, agents:, tasks:, [##--])
+# - powerline: Powerline glyphs (✍, ⚡, ⟳, 💻, 🤖, ⚙, , ■□)
+THEME="emoji"
+
+# Layout mode: auto (default), full, compact, single
+# - auto:    Dynamically adjusts layout based on terminal width
+#            (width >= 70: full, 48-69: compact 2-line, < 48: single line)
+# - full:    Always renders standard multi-line layout
+# - compact: Always renders condensed 2-line layout
+# - single:  Always renders ultra-compact 1-line layout
+LAYOUT="auto"
+
+# Progress bar width (number of segments, default: 10)
+BAR_WIDTH=10
+
+# Show relative countdown in quota resets, e.g. "in 2h 15m" (true / false, default: true)
+RELATIVE_TIME=true
+
+# Show visual critical alert markers for context >= 90% or low quota (true / false, default: true)
+CRITICAL_ALERTS=true
+
+# Computer name / Hostname display:
+# - auto:    (default) Automatically show hostname when in an SSH session (SSH_CLIENT, SSH_TTY, etc.)
+# - always:  Always show the computer name even in local sessions
+# - never:   Disable computer name display
+SHOW_HOSTNAME="auto"
+
+# Hostname format: short (e.g. "proxmox-01") or full (e.g. "jay@proxmox-01")
+HOSTNAME_FORMAT="short"
+
+# Show SSH indicator badge (e.g. "[SSH]" / "[󰣀 SSH]") when in an SSH session (true / false, default: true)
+SHOW_SSH_INDICATOR=true
+
+# Custom text for SSH indicator badge (default: "SSH")
+SSH_INDICATOR_TEXT="SSH"
+
+# Show active subagents / background tasks counter badge (true / false, default: true)
+SHOW_TASKS=true
+
+# Show plan tier badge in status line when width permits (true / false, default: true)
+SHOW_PLAN=true

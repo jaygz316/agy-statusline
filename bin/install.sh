@@ -2,10 +2,13 @@
 set -e
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+REPO_DIR="$(cd "$SCRIPT_DIR/.." && pwd)"
 AGY_DIR="$HOME/.gemini/antigravity-cli"
 SETTINGS_FILE="$AGY_DIR/settings.json"
 STATUSLINE_DEST="$HOME/.gemini/statusline.sh"
 STATUSLINE_SRC="$SCRIPT_DIR/statusline.sh"
+CONFIG_DEST="$HOME/.gemini/statusline.conf"
+CONFIG_SRC="$REPO_DIR/statusline.conf.example"
 
 blue='\033[38;2;0;153;255m'
 green='\033[38;2;0;175;80m'
@@ -43,6 +46,14 @@ cp "$STATUSLINE_SRC" "$STATUSLINE_DEST"
 chmod +x "$STATUSLINE_DEST"
 ok "Installed statusline to ${dim}$STATUSLINE_DEST${reset}"
 
+# ── Install configuration file if not present ────────────
+if [ ! -f "$CONFIG_DEST" ] && [ -f "$CONFIG_SRC" ]; then
+    cp "$CONFIG_SRC" "$CONFIG_DEST"
+    ok "Created default configuration at ${dim}$CONFIG_DEST${reset}"
+elif [ -f "$CONFIG_DEST" ]; then
+    ok "Preserved existing configuration at ${dim}$CONFIG_DEST${reset}"
+fi
+
 # ── Update settings.json ─────────────────────────────────
 if [ ! -f "$SETTINGS_FILE" ]; then
     echo '{}' > "$SETTINGS_FILE"
@@ -63,4 +74,5 @@ fi
 
 echo
 echo -e "  ${green}Done!${reset} Restart agy to see your status line."
+echo -e "  ${dim}Configure themes & layout in $CONFIG_DEST${reset}"
 echo

@@ -3,6 +3,7 @@ set -e
 
 STATUSLINE_DEST="$HOME/.gemini/statusline.sh"
 STATUSLINE_BACKUP="${STATUSLINE_DEST}.bak"
+CONFIG_FILE="$HOME/.gemini/statusline.conf"
 SETTINGS_FILE="$HOME/.gemini/antigravity-cli/settings.json"
 
 blue='\033[38;2;0;153;255m'
@@ -36,6 +37,10 @@ if [ -f "$SETTINGS_FILE" ]; then
     tmp=$(mktemp)
     jq 'del(.statusLine)' "$SETTINGS_FILE" > "$tmp" && mv "$tmp" "$SETTINGS_FILE"
     ok "Removed statusLine from ${dim}settings.json${reset}"
+fi
+
+if [ -f "$CONFIG_FILE" ]; then
+    ok "Preserved configuration at ${dim}$CONFIG_FILE${reset}"
 fi
 
 echo
